@@ -4,7 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information Form</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://source.unsplash.com/1600x900/?nature,water');
+    background-size: cover;
+    color: #fff;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#currentTime {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+main {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+button {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.response {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e2f0d9;
+    border: 1px solid #c3e6cb;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    main {
+        margin: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+    </style>
 </head>
 <body>
     <header>
@@ -13,7 +118,7 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </nav>
         <div id="currentTime"></div>
@@ -59,15 +164,13 @@
 
         <section id="about">
             <h2>About</h2>
-            <p>This application collects user information and stores it in a database.</p>
+            <p>This application collects user information and stores it in an email.</p>
         </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Tel: +256779979629
-                otungaallan256@gmail.com
-            </p>
-            <p>Email: <a href="https://mail.google.com/" target="_blank">Open Email</a></p>
+        <section id="contact us">
+            <h2>Contact Us</h2>
+            <p>Tel: +256779979629</p>
+            <p>otungaallan256@gmail.com</p>
         </section>
     </main>
     
@@ -75,6 +178,36 @@
         <p>&copy; 2025 User Info Form. All rights reserved.</p>
     </footer>
     
-    <script src="script.js"></script>
+    <script>
+        // Function to update the current time
+function updateTime() {
+    const now = new Date();
+    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('currentTime').innerText = now.toLocaleTimeString([], options);
+}
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Function to send email through mailto link
+function sendEmail() {
+    const firstName = document.getElementById('firstName').value;
+    const secondName = document.getElementById('secondName').value;
+    const gender = document.getElementById('gender').value;
+    const age = document.getElementById('age').value;
+    const occupation = document.getElementById('occupation').value;
+    const nin = document.getElementById('nin').value;
+    const contact = document.getElementById('contact').value;
+    const address = document.getElementById('address').value;
+
+    const emailBody = `First Name: ${firstName}\nSecond Name: ${secondName}\nGender: ${gender}\nAge: ${age}\nOccupation: ${occupation}\nID NIN: ${nin}\nContact: ${contact}\nAddress: ${address}`;
+    const emailLink = `mailto:otungaallan256@gmail.com=User Information&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = emailLink;
+    document.getElementById('response').innerText = "Form submitted, please check your email client.";
+    
+    return false; // Prevent form submission
+}
+
+    </script>
 </body>
 </html>
